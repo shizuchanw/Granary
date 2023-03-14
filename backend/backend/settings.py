@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
     'authentication',
+    "article",
+    "comments",
+    'like'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -97,10 +103,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),  #
 }
 SIMPLE_JWT = {
@@ -120,6 +126,15 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = "authentication.CustomUser"
 
+CSRF_TRUSTED_ORIGINS = [
+"http://localhost:3000",
+"http://127.0.0.1:3000"
+]
+
+CORS_ALLOWED_ORIGINS = [
+"http://localhost:3000",
+"http://127.0.0.1:3000"
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
