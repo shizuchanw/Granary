@@ -55,7 +55,10 @@ class CustomUserView(APIView):
         user = request.user
         try:
             serializer = CustomUserSerializer(user)
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            data = serializer.data
+            data['id'] = user.id
+            data['is_adult'] = user.is_adult
+            return Response(data, status=status.HTTP_202_ACCEPTED)
         except:
             None
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -65,6 +68,7 @@ class CustomUserView(APIView):
             user = request.user
             user.username = request.data['username']
             user.email = request.data['email']
+            user.is_adult = request.data['is_adult']
             user.save()
             serializer = CustomUserSerializer(user)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

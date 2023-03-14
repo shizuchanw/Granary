@@ -53,6 +53,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         article = get_object_or_404(Article, pk=pk)
+        if request.user.is_anonymous or (not request.user.is_adult and article.grading.name !="G"):
+            return Response("此内容只开放给成年注册用户。", status=status.HTTP_401_UNAUTHORIZED)
         serializer = ArticleSerializer(article)
         data = serializer.data
         data['username'] = article.creator.get_username()
@@ -69,6 +71,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         article = get_object_or_404(Article, pk=pk)
+        # check whether the current user is the same creator
+        if request.user.id is not article.creator.id:
+            return Response("只有作者才有权限编辑。", status=status.HTTP_401_UNAUTHORIZED)
         # create tag if not exist
         fandoms = request.data['fandoms']
         cps = request.data['cps']
@@ -97,6 +102,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         article = get_object_or_404(Article, pk=pk)
+        if request.user.id is not article.creator.id:
+            return Response("只有作者才有权限删除。", status=status.HTTP_401_UNAUTHORIZED)
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -121,6 +128,10 @@ class TagResultView(APIView):
     def get(self, request, *args, **kwargs):
         tag_type = kwargs.get('tag_type')
         tag_name = kwargs.get('tag_name')
+        # filter for adult content
+        if tag_type=='grading' and tag_name!='G' and (request.user.is_anonymous or not request.user.is_adult):
+            return Response("此内容只开放给成年注册用户。。", status=status.HTTP_401_UNAUTHORIZED)
+
         dic = {'fandom': Fandom, 'cp': CP, 'character': Character, 'grading': Grading, 'othertag': OtherTag}
 
         try:
@@ -139,6 +150,7 @@ class AuthorResultView(APIView):
         try:
             author = CustomUser.objects.filter(pk=author_id)[0];
             query_set = author.article_set.all()
+            query_set = _filter_adult_content(query_set, request.user)
             data = _append_info(query_set, ArticleSerializer)
         except:
             return None
@@ -152,6 +164,7 @@ class LikeResultView(APIView):
         try:
             likes = user.like_set.all().values_list('article', flat=True)
             articles = Article.objects.filter(pk__in=likes)
+            articles = _filter_adult_content(articles, request.user)
             data = _append_info(articles, ArticleSerializer)
         except:
             return None
@@ -163,6 +176,7 @@ class BookmarkResultView(APIView):
         try:
             bookmarks = user.bookmark_set.all().values_list('article', flat=True)
             articles = Article.objects.filter(pk__in=bookmarks)
+            articles = _filter_adult_content(articles, request.user)
             data = _append_info(articles, ArticleSerializer)
         except:
             return None
@@ -201,6 +215,7 @@ def _check_keywords(request, articles):
 class SearchResultView(APIView):
     def get(self, request, *args, **kwargs):
         articles = Article.objects.all()
+        articles = _filter_adult_content(articles, request.user)
         # filter by tags
         for tag in ['fandoms', 'cps', 'characters', 'tags', 'grading']:
             if tag == 'grading':
@@ -222,3 +237,8 @@ def _append_info(query_set, Serializer):
         temp.update({'bookmark_count': item.bookmark_count})
         data.append(temp)
     return data
+
+def _filter_adult_content(query_set, user):
+    if user.is_anonymous or not user.is_adult:
+        query_set = query_set.exclude(grading__name__contains="R18")
+    return query_set
