@@ -2,14 +2,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCqcW42wc_BVINqsyluvbI3gEnCoy0FZ9k",
-  authDomain: "foodstorage-37de5.firebaseapp.com",
-  databaseURL: "https://foodstorage-37de5-default-rtdb.firebaseio.com",
-  projectId: "foodstorage-37de5",
-  storageBucket: "foodstorage-37de5.appspot.com",
-  messagingSenderId: "669089650814",
-  appId: "1:669089650814:web:ca073925b83af5bb9f602f",
-  measurementId: "G-F1889WW5J6",
+  apiKey: "AIzaSyAZ35QzsiANIpF8AaETeh4fJfU6fylMiUY",
+  authDomain: "fanfic-granary.firebaseapp.com",
+  projectId: "fanfic-granary",
+  storageBucket: "fanfic-granary.appspot.com",
+  messagingSenderId: "1071645886061",
+  appId: "1:1071645886061:web:75c8c30db62b42ff74a164",
+  measurementId: "G-2BDV3C2JV4",
 };
 
 // Initialize Firebase

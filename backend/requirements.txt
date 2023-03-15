@@ -3,6 +3,6 @@ djangorestframework==3.14.0
 djangorestframework_simplejwt==5.2.2
 rest_framework_simplejwt==0.0.1
 django-cors-headers
-pymysql
+psycopg2
 whitenoise
 gunicorn

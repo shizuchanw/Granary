@@ -12,13 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
-import pymysql
-pymysql.install_as_MySQLdb()
-
-os.environ['DBNAME'] = 'uopdqr9q3k1xpqr8'
-os.environ['DBUSER'] = 'xpaaum2oinbesz36'
-os.environ['DBPASS'] = 'jo7t3spcw39rpxye'
-os.environ['DBHOST'] = 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,12 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-2i4#+2=_kjdt7choqd&0_@5_!%r3b8#v!udfnenito*)qppjp+"
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -92,12 +83,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": 'django.db.backends.mysql',
+        "ENGINE": 'django.db.backends.postgresql',
         'NAME': os.environ['DBNAME'],
         'USER': os.environ['DBUSER'],
         'PASSWORD': os.environ['DBPASS'],
         'HOST': os.environ['DBHOST'],
-        'PORT': '3306',
+        'PORT': os.environ['PORT'],
     }
 }
 
@@ -141,12 +132,14 @@ AUTH_USER_MODEL = "authentication.CustomUser"
 
 CSRF_TRUSTED_ORIGINS = [
 "http://localhost:3000",
-"http://127.0.0.1:3000"
+"http://127.0.0.1:3000",
+"https://fanfic-granary.web.app"
 ]
 
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:3000",
-"http://127.0.0.1:3000"
+"http://127.0.0.1:3000",
+"https://fanfic-granary.web.app"
 ]
 
 # Internationalization

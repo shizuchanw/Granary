@@ -79,6 +79,7 @@
     text-align: left
 }
 
+
 .search-bar img {
   width: 35px;
   height: 30px;
@@ -94,6 +95,24 @@
 
 .search-pref-button {
   margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .home-banner div {
+    width: 80%;
+  }
+
+  .home-banner h2 {
+    width: 80%;
+  }
+
+  .search-bar {
+    width: 80%;
+  }
+
+  .search-pref {
+    width: 80%;
+  }
 }
 
 
@@ -156,6 +175,12 @@
 .dashboard-box a:hover {
   text-decoration: none;
   color: #373576;
+}
+
+@media only screen and (max-width: 600px) {
+  .dashboard-box div{
+    width: 80%;
+  }
 }
 
 /* ============================== new work ============================== */
@@ -381,8 +406,15 @@ color: hsl(235, 50%, 67%);
   margin-left: 5px;
 }
 
-
 .grading-tag {
   font-weight: bold;
 }
 
+@media only screen and (max-width: 600px) {
+  .search-result-box ul {
+    margin: 0;
+  }
+  .tag {
+    display: inline-block
+  }
+}

@@ -14,8 +14,10 @@ const AuthorPage = () => {
   return (
     <div className="container search-result-box">
       <h1 className="search-result-title">
-        {results[0]["username"] + "的作品："}
-        {results.length}件
+        {results &&
+          results[0] &&
+          results[0]["username"] + "的作品：" + results.length + "件"}
+        {(!results || !results[0]) && "该用户尚未发表作品。"}
       </h1>
       <ul>
         {results.map((ele) => (

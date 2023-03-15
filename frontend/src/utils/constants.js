@@ -1,5 +1,5 @@
 // export const backendPath = "http://127.0.0.1:8000/";
-export const backendPath = "http://fanfic-storage.herokuapp.com/";
+export const backendPath = "https://fanfic-storage.herokuapp.com/";
 
 export const fanficPath = "fanfic/";
 
