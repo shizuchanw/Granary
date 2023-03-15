@@ -1,0 +1,388 @@
+.footer {
+  width: 100%;
+  height: 40px;
+  background-color: #222222;
+}
+.App {
+  text-align: center;
+}
+.container {
+    min-height: 70vh;
+}
+
+.change-cursor {
+  cursor: pointer;
+}
+
+.form-label-required:after {
+  content: " *";
+  color: red;
+}
+
+.hide {
+  display: none;
+}
+
+.error-msg {
+  color: hsl(0, 100%, 67%);
+}
+
+.mt-1 {
+  margin-top: .25rem;
+}
+
+.mr-1 {
+  margin-right: .25em;
+}
+.ml-3 {
+  margin-left: 1.5rem;
+}
+
+.screenFiller {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* ============================== home ============================== */
+.homebox {
+  margin-top: 10em;
+}
+.home-banner div
+{
+  display: block;
+    margin: 3em auto;
+    width: 50%;
+    height: 128px;
+    background: linear-gradient(87.58deg, #A8F7E4 0%, #85D4ED 100%);
+    filter: blur(10px);
+    border-radius: 40px;
+}
+
+.home-banner h2{
+  margin: -5em auto 4em auto;
+    width: 50%;
+    height: 30px;
+  position: relative;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 30px;
+  color: #515461;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.search-bar {
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+    text-align: left
+}
+
+.search-bar img {
+  width: 35px;
+  height: 30px;
+}
+
+.search-pref{
+  width: 50%;
+  margin: 2em auto;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: #f8f8fa;
+}
+
+.search-pref-button {
+  margin-top: 10px;
+}
+
+
+/* ============================== login ============================== */
+.loginbox {
+  margin-top: 8em;
+  min-height: 75vh;
+}
+
+.loginbox .textlink {
+  font-size: x-small;
+  text-align: end;
+}
+
+/* ============================== register ============================== */
+.register-form {
+  text-align: left;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.register-form h4 {
+  font-size: larger;
+}
+
+.register-form section {
+  margin-bottom: 50px;
+}
+.register-box {
+  margin: 1em auto;
+}
+
+/* ============================== error ============================== */
+.error {
+  margin: 5em 0;
+  font-size: large;
+}
+
+.error-img {
+  margin-bottom: 3em;
+}
+
+/* ============================== dashboard ============================== */
+.dashboard-box div {
+  width: 40%;
+  background-color: #c1cbde;
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 50px;
+}
+.dashboard-box div:hover{
+  transition: all 0.2s ease-in;
+  filter: brightness(90%);
+}
+.dashboard-box a {
+  all: unset;
+  font-size: xx-large;
+}
+
+.dashboard-box a:hover {
+  text-decoration: none;
+  color: #373576;
+}
+
+/* ============================== new work ============================== */
+.new-work-box {
+  text-align: left;
+}
+
+/* ============================== button ============================== */
+.btn {
+  --hue: 235;
+  --color: hsl(var(--hue), 100%, 67%);
+  padding: .5em 1em;
+  background: var(--color);
+  border: none;
+  color: white;
+  border-radius: .5em;
+  font-size: .75em;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  --color: hsl(var(--hue), 100%, 74%);
+}
+.btn[disabled] {
+  --color: hsl(var(--hue), 20%, 74%);
+}
+
+.btn.icon-btn {
+  background: none;
+  color: var(--color);
+  /* display: flex; */
+  align-items: center;
+} 
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  --color: hsl(var(--hue), 100%, 74%);
+}
+
+.icon-btn-active,
+.icon-btn.danger {
+  --hue: 0;
+}
+
+.icon-btn-active {
+  position: relative;
+}
+
+.icon-btn-active::before {
+  content: "\00D7";
+  position: absolute;
+  font-size: .75em;
+  width: 1em;
+  height: 1em;
+  color: white;
+  background-color: var(--color);
+  border-radius: 50%;
+  bottom: .1em;
+  right: .1em;
+}
+
+/* ============================== comment ============================== */
+.new-comment-box {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.new-comment-box .comment {
+  width: 100%;
+  margin: auto;
+  border-style: dashed;
+  border-color: #cfd0d1;
+  padding: 10px;
+}
+
+.comment-section {
+  width: 80%;
+  margin: 5em auto 0 auto;
+}
+
+.comment-section h3 {
+  text-align: left;
+}
+
+.comment-section ul {
+  padding: 0;
+}
+
+.comment-commentbox {
+  list-style-type: none;
+  text-align: left;
+  background-color: rgb(236, 234, 234);
+  border: 1px dotted;
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: .5rem 0;
+}
+
+.comment-commentbox:last-child {
+  margin-bottom: 50px;
+}
+
+.comment-commentbox .bottom {
+  text-align: right;
+}
+
+.comment-commentbox .header{
+color: hsl(235, 50%, 67%);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .25rem;
+  font-size: .75em;
+}
+.comment-commentbox .message
+{
+  white-space: pre-wrap;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+/* ============================== nested comment ============================== */
+
+.nested-comments {
+  padding-left: .5rem;
+  flex-grow: 1;
+}
+
+.nested-comments-stack {
+  display: flex;
+}
+
+.collapse-line {
+  border: none;
+  background: none;
+  padding: 0;
+  width: 15px;
+  margin-top: .5rem;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transform: translateX(-50%);
+}
+
+.collapse-line:hover::before,
+.collapse-line:focus-visible::before {
+  background-color: hsl(235, 100%, 60%);
+}
+
+.collapse-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: hsl(235, 50%, 74%);
+  transition: background-color 100ms ease-in-out;
+}
+
+/* ============================== article ============================== */
+.article-main {
+  width: 80%;
+  margin: 0 auto;
+}
+.article-main .bottom {
+  text-align: right;
+}
+.article-info {
+  margin-top: 2em;
+  border: 1px solid;
+  border-radius: 10px;
+  text-align: left;
+  padding: 3px 15px 10px 15px;
+  font-size: small;
+}
+.article-info div {
+  margin-top: 10px;
+}
+.article-info .stats {
+  text-align: right;
+}
+.article-main h1 {
+  margin-top: 1em;
+}
+.article-content {
+  text-align: left;
+  /* 需要修改成根据作者设定显示 */
+}
+/* ============================== search result ============================== */
+.search-result-box {
+  min-height: 80vh;
+}
+.search-result-title {
+  margin: 1em 0;
+}
+.search-result-component {
+  list-style-type: none;
+  text-align: left;
+  border: 1px solid;
+  padding: 10px 10px 5px 10px;
+  margin: 1em auto;
+  font-size: small;
+}
+
+.search-result-component-title {
+  font-size:medium;
+}
+.search-result-component-title span {
+  font-size: small;
+}
+
+.search-result-component-tags span {
+  margin-right: 1em;
+}
+
+.search-result-component .stats {
+  text-align: right;
+}
+
+.tag {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 1px 3px;
+  margin-left: 5px;
+}
+
+
+.grading-tag {
+  font-weight: bold;
+}
+

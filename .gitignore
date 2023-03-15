@@ -3,3 +3,5 @@
 backend/db.sqlite3
 .DS_Store
 backend/venv/*
+*.cache
+frontend/.firebaserc
