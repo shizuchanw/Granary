@@ -15,6 +15,11 @@ from pathlib import Path
 import pymysql
 pymysql.install_as_MySQLdb()
 
+os.environ['DBNAME'] = 'uopdqr9q3k1xpqr8'
+os.environ['DBUSER'] = 'xpaaum2oinbesz36'
+os.environ['DBPASS'] = 'jo7t3spcw39rpxye'
+os.environ['DBHOST'] = 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+'django.contrib.staticfiles',
     "rest_framework",
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
@@ -57,6 +63,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 'corsheaders.middleware.CorsMiddleware',
+"whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -82,6 +89,7 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.mysql',
@@ -152,6 +160,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','fanfic-storage.herokuapp.com']
+
+STATIC_URL="/static/"
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR,  'templates'),
+    # Add to this list all the locations containing your static files
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
