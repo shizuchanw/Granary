@@ -53,20 +53,28 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         article = get_object_or_404(Article, pk=pk)
-        if request.user.is_anonymous or (not request.user.is_adult and article.grading.name !="G"):
-            return Response("此内容只开放给成年注册用户。", status=status.HTTP_401_UNAUTHORIZED)
         serializer = ArticleSerializer(article)
         data = serializer.data
         data['username'] = article.creator.get_username()
         data['word_count'] = article.word_count
         data['like_count'] = article.like_count
         data['bookmark_count'] = article.bookmark_count
-        data['liked_by_me'] = False
-        data['bookmarked_by_me'] = False
-        if article.like_set.filter(liked_by=request.user.id).count() > 0:
-            data['liked_by_me'] = True
-        if article.bookmark_set.filter(bookmarked_by=request.user.id).count() > 0:
-            data['bookmarked_by_me'] = True
+
+        if request.user.is_anonymous:
+            if request.session.get('guest_id') != None:
+                id = request.session.get('guest_id')
+                user = CustomUser.objects.filter(username=f"{id}_guest")[0]
+                data['liked_by_me'] = article.like_set.filter(liked_by=user).count() > 0
+            else:
+                data['liked_by_me'] = False
+        else:
+            data['liked_by_me'] = article.like_set.filter(liked_by=request.user.id).count() > 0
+
+        if request.user.is_anonymous:
+            data['bookmarked_by_me'] = False
+        else:
+            data['bookmarked_by_me'] = article.bookmark_set.filter(bookmarked_by=request.user.id).count() > 0
+
         return Response(data)
 
     def update(self, request, pk=None):

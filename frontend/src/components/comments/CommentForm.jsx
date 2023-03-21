@@ -22,7 +22,9 @@ const CommentForm = ({
           autoFocus={autoFocus}
           className="comment"
           value={comment}
-          placeholder="留下你的评论…"
+          placeholder={localStorage.getItem(
+            "access_token" ? "留下你的评论…" : "note: 匿名用户评论后无法修改"
+          )}
           onChange={(e) => {
             setComment(e.target.value);
           }}

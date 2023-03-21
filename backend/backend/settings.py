@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+os.environ['DBNAME'] = 'd5felnhom4r0cq'
+os.environ['DBUSER'] = 'djlhdfzocjcjyl'
+os.environ['DBPASS'] = '7c2d195d71b7eaaa3fe3440d8858e710f47eeafbd2639886635c903b23bc881a'
+os.environ['DBHOST'] = 'ec2-54-208-11-146.compute-1.amazonaws.com'
+os.environ['PORT'] = '5432'
+os.environ['SECRET_KEY'] = 'django-insecure-2i4#+2=_kjdt7choqd&0_@5_!%r3b8#v!udfnenito*)qppjp+'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,8 +48,9 @@ INSTALLED_APPS = [
     'authentication',
     "article",
     "comments",
-    'like'
+    'like',
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -58,6 +65,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backend.urls"
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_NAME = "user_session"
+SESSION_COOKIE_HTTPONLY = True
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
 
 TEMPLATES = [
     {
@@ -104,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

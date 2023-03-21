@@ -1,12 +1,13 @@
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, status
 from django.shortcuts import get_object_or_404
-from django.db.models import F
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from authentication.models import CustomUser
 from .models import *
 from .serializer import *
 from datetime import datetime
+from authentication.utils import short_uuid
 
 def _append_username(query_set, Serializer):
     data = list()
@@ -38,7 +39,17 @@ class CommentViewSet(viewsets.ModelViewSet):
         now = datetime.now()
         data['createdTime'] = now
         data['lastEditTime'] = now
-        data['creator'] = request.user.id
+        if request.user.is_anonymous:
+            if request.session.get('guest_id', None)==None:
+                id = request.session.get('guest_id')
+                guest = CustomUser.objects.filter(username=f"{id}_guest")[0]
+            else:
+                id = short_uuid.create()
+                request.session['guest_id'] = id
+                guest = CustomUser.objects.create(username=f"{id}_guest", is_active=False)
+            data['creator'] = guest.id
+        else:
+            data['creator'] = request.user.id
         serializer = CommentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

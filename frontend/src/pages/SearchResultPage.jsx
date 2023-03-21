@@ -4,11 +4,10 @@ import SearchResultComponent from "../components/search/SearchResultComponent";
 import { getArticlesByTag, getArticlesByQuery } from "../utils/articleAPI";
 
 const SearchResultPage = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState("");
   const [params] = useSearchParams();
   const { tagType, tag } = useParams();
   const keywords = params.get("keywords");
-  const error = "";
 
   if (tag) {
     getArticlesByTag(tag, tagType)
@@ -24,6 +23,8 @@ const SearchResultPage = () => {
       });
   }
 
+  if (results == "") return <h2>加载中…</h2>;
+
   return (
     <div className="container search-result-box">
       <h1 className="search-result-title">
@@ -34,7 +35,6 @@ const SearchResultPage = () => {
           "搜索“" + keywords + "”的结果："}
         {results.length}件
       </h1>
-      <h2>{error}</h2>
       <ul>
         {results.map((ele) => (
           <SearchResultComponent result={ele} key={ele.id} />

@@ -85,7 +85,7 @@ export function ArticleProvider({ children }) {
       }}
     >
       {loading_article || loading_comments ? (
-        <h2>Loading</h2>
+        <h2>加载中…</h2>
       ) : error_article || error_comments ? (
         <div className="screenFiller ">
           {error_article ? <h2>{error_article}</h2> : ""}{" "}

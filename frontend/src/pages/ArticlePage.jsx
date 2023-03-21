@@ -45,6 +45,10 @@ const ArticlePage = () => {
 
   const toggleBookmarkFn = useAsyncFn(toggleBookmark);
   function onToggleBookmark() {
+    if (localStorage.getItem("access_token") == null) {
+      alert("收藏请先登录。");
+      return;
+    }
     return toggleBookmarkFn.execute(article.id).then(() => {
       setMarkedCount(markedByMe ? markedCount - 1 : markedCount + 1);
       setMarkedByMe(!markedByMe);

@@ -6,5 +6,5 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('fanfic/', include('article.urls')),
     path('comments/', include('comments.urls')),
-    path('', include('like.urls'))
+    path('', include('like.urls')),
 ]

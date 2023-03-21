@@ -255,6 +255,12 @@
   padding: 10px;
 }
 
+.comment-guestname {
+  width: 100%;
+    margin: auto;
+    padding: 10px;
+}
+
 .comment-section {
   width: 80%;
   margin: 5em auto 0 auto;
